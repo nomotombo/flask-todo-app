@@ -1,0 +1,40 @@
+{
+  "yuriasunshine0218@gmail.com": [
+    {
+      "text": "AWS SAA合格",
+      "deadline": "2026-05-16 12:00",
+      "done": false,
+      "notified": true,
+      "priority": "中",
+      "category": "勉強",
+      "notify_timing": "当日"
+    },
+    {
+      "text": "AWS SAA合格",
+      "deadline": "2026-05-16 12:00",
+      "done": false,
+      "notified": true,
+      "priority": "中",
+      "category": "勉強",
+      "notify_timing": "当日"
+    },
+    {
+      "text": "AWS SAP合格",
+      "deadline": "2026-05-16 11:24",
+      "done": false,
+      "notified": true,
+      "priority": "中",
+      "category": "就活",
+      "notify_timing": "当日"
+    },
+    {
+      "text": "AWS SCS合格",
+      "deadline": "2026-05-17 10:30",
+      "done": false,
+      "notified": true,
+      "priority": "中",
+      "category": "その他",
+      "notify_timing": "1日前"
+    }
+  ]
+}
