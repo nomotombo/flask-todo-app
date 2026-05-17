@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDoアプリ</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+<div class="container py-4">
+
+    <h1 class="text-center mb-4">ToDoアプリ</h1>
+
+    <form method="post" action="/add" class="card p-3 shadow-sm mb-4">
+        <div class="mb-3">
+            <label class="form-label">タスク名</label>
+            <input type="text" name="text" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">期限</label>
+            <input type="datetime-local" name="deadline" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">優先度</label>
+            <select name="priority" class="form-select">
+                <option value="高">高</option>
+                <option value="中" selected>中</option>
+                <option value="低">低</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">カテゴリ</label>
+            <select name="category" class="form-select">
+                <option value="就活">就活</option>
+                <option value="勉強">勉強</option>
+                <option value="生活">生活</option>
+                <option value="提出物">提出物</option>
+                <option value="その他" selected>その他</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">通知タイミング</label>
+            <select name="notify_timing" class="form-select">
+                <option value="1時間前">1時間前</option>
+                <option value="当日">当日</option>
+                <option value="1日前" selected>1日前</option>
+                <option value="3日前">3日前</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">追加</button>
+    </form>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h4 class="mb-3">タスク一覧</h4>
+
+            <ul class="list-group">
+                {% for task in tasks %}
+                <li class="list-group-item">
+                    <div class="d-flex justify-content-between align-items-start gap-2">
+                        <div>
+                            {% if task["priority"] == "高" %}
+                                <span class="badge bg-danger">高</span>
+                            {% elif task["priority"] == "中" %}
+                                <span class="badge bg-warning text-dark">中</span>
+                            {% else %}
+                                <span class="badge bg-secondary">低</span>
+                            {% endif %}
+
+                            <span class="badge bg-info text-dark">{{ task["category"] }}</span>
+
+                            <div class="mt-2">
+                                {% if task["done"] == 1 %}
+                                    <span class="text-decoration-line-through text-muted">
+                                        {{ task["text"] }}
+                                    </span>
+                                {% else %}
+                                    <strong>{{ task["text"] }}</strong>
+                                {% endif %}
+                            </div>
+
+                            <small class="text-muted">
+                                期限：{{ task["deadline"] }} / 通知：{{ task["notify_timing"] }}
+                            </small>
+                        </div>
+
+                        <div class="d-flex flex-column gap-2">
+                            {% if task["done"] == 0 %}
+                            <a href="/complete/{{ task['id'] }}" class="btn btn-success btn-sm">
+                                完了
+                            </a>
+                            {% endif %}
+
+                            <a href="/delete/{{ task['id'] }}" class="btn btn-danger btn-sm">
+                                削除
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                {% else %}
+                <li class="list-group-item text-muted">
+                    タスクはまだありません。
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
